@@ -1,6 +1,6 @@
 import type { AssetSize, ResolvedAssetSize } from '../types.ts'
 import type { GenerateOptionsOptionType, GenerateOptionsType, ImageSourceInput } from './types.ts'
-import sharp, { type PngOptions, type WebpOptions } from 'sharp'
+import sharp, { type Color, type CreateChannels, type PngOptions, type WebpOptions } from 'sharp'
 import { toResolvedSize } from '../utils.ts'
 
 export function extractAssetSize(size: ResolvedAssetSize, padding: number) {
@@ -21,9 +21,9 @@ export async function createSharp<OutputType extends GenerateOptionsType>(
   type: OutputType,
   image: ImageSourceInput,
   size: AssetSize,
-  background: sharp.Color,
+  background: Color,
   options?: GenerateOptionsOptionType<OutputType>,
-  channels?: sharp.Channels,
+  channels?: CreateChannels,
 ) {
   const { padding = 0 } = options ?? {}
   const useSize = toResolvedSize(size)
